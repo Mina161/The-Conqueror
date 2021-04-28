@@ -9,12 +9,13 @@ public class City {
     private ArrayList<MilitaryBuilding> militaryBuildings;
     private Army defendingArmy;
     private int turnsUnderSiege ;
-    private boolean underSiege ;
+    private boolean underSiege=false;
     
 
     public City(String name) {
     	this.name=name;
-    	this.underSiege=false;
+    	economicalBuildings = new ArrayList<EconomicBuilding>();
+    	militaryBuildings = new ArrayList<MilitaryBuilding>();
     }
     
     
@@ -51,7 +52,7 @@ public class City {
 	public void setUnderSiege(boolean underSiege) {
 		this.underSiege = underSiege;
 	}
-	public boolean getUnderSiege() {
+	public boolean isUnderSiege() {
 		return underSiege;
 	}
 

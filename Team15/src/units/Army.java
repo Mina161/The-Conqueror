@@ -10,7 +10,7 @@ public class Army {
 	final private int maxToHold = 10; //READ ONLY
 	
 	public Army(String currentLocation) {
-		this.setCurrentLocation(currentLocation);
+		this.currentLocation = currentLocation;
 		units = new ArrayList<Unit>();
 	}
 
@@ -57,4 +57,6 @@ public class Army {
 	public int getMaxToHold() {
 		return maxToHold;
 	}
+	
+	
 }

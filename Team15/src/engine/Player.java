@@ -11,6 +11,8 @@ public class Player {
 	
 	public Player(String name) {
 		this.name=name;
+		controlledCities = new ArrayList<City>();
+		controlledArmies = new ArrayList<Army>();
 	}
 	
 	public String getName() {
@@ -25,27 +27,24 @@ public class Player {
 		return controlledArmies;
 	}
 	
-	
-	
 	public double getTreasury(){
 		return treasury ;
 	}
+	
 	public void setTreasury(double treasury){
 		this.treasury=treasury ;
 	}
 	
-	
-	
-	
 	public double getFood(){
 		return food ;
 	}
+	
 	public void setFood(double food){
 		this.food=food ;
 	}
 	
+	public void setStartCity(String cityName) {
+		controlledCities.add(new City(cityName));
+	}
 	
-	
-	
-
 }
