@@ -43,8 +43,8 @@ public class Player {
 		this.food=food ;
 	}
 	
-	public void setStartCity(String cityName) {
-		controlledCities.add(new City(cityName));
+	public void setStartCity(City city) {
+		controlledCities.add(city);
 	}
 	
 }

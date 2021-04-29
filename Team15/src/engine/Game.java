@@ -13,14 +13,16 @@ public class Game {
 	
 	public Game(String playerName,String playerCity) throws IOException{
 		player = new Player(playerName);
-		player.setStartCity(playerCity);
 		availableCities = new ArrayList<City>();
 		distances = new ArrayList<Distance>();
 		loadCitiesAndDistances();
 		for(int i = 0; i<availableCities.size(); i++) {
 			City curCity = availableCities.get(i);
 			if(!curCity.getName().equals(playerCity))
-				loadArmy(curCity.getName(),curCity.getName()+".csv");
+				loadArmy(curCity.getName(),curCity.getName()+"_army.csv");
+			else {
+				player.setStartCity(curCity);
+			}
 		}
 	}
 	
@@ -53,6 +55,9 @@ public class Game {
 		this.currentTurnCount = currentTurnCount;
 	}
 	
+	/*
+	 * readFile method taken from the document provided with additional edits done by us to help in our implementation
+	 */
 	public static String[] readFile(String path) throws IOException{
 		String currentLine = "";
 		String allLines = "";

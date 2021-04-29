@@ -1376,7 +1376,8 @@ public class M1PublicTests {
 				String.class, String.class);
 		String name = "name" + (int)(Math.random()*10);
 		Object b = constructor.newInstance(name, "Cairo");
-		Constructor<?> constructorP = Class.forName(playerPath).getConstructor(String.class);
+		Constructor<?> constructorP = Class.forName(playerPath).getConstructor(
+				String.class);
 		Object p = constructorP.newInstance(name);
 		testGetterLogic(b, "player", p);
 	}
