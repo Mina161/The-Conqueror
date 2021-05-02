@@ -21,7 +21,7 @@ public class Game {
 			if(!curCity.getName().equals(playerCity))
 				loadArmy(curCity.getName(),curCity.getName()+"_army.csv");
 			else {
-				player.setStartCity(curCity);
+				player.getControlledCities().add(curCity);
 			}
 		}
 	}
