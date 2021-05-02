@@ -9,7 +9,7 @@ public class Game {
 	private ArrayList<City> availableCities;
 	private ArrayList<Distance> distances;
 	private final int maxTurnCount = 30 ;
-	private int currentTurnCount = 1; // wait if you want to delete this 1 until we construct the constructor 
+	private int currentTurnCount = 1;
 	
 	public Game(String playerName,String playerCity) throws IOException{
 		player = new Player(playerName);
