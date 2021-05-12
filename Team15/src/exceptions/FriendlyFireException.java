@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class FriendlyFireException extends ArmyException {
 	public FriendlyFireException() {
 		

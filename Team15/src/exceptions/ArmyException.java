@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public abstract class ArmyException extends EmpireException {
 	public ArmyException()
 	{

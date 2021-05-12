@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public abstract class EmpireException extends Exception {
 
 	public EmpireException()

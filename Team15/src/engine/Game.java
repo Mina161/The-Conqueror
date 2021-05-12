@@ -9,7 +9,7 @@ public class Game {
 	private ArrayList<City> availableCities;
 	private ArrayList<Distance> distances;
 	private final int maxTurnCount = 30 ;
-	private int currentTurnCount = 1;
+	private int currentTurnCount = 1; // wait if you want to delete this 1 until we construct the constructor 
 	
 	public Game(String playerName,String playerCity) throws IOException{
 		player = new Player(playerName);
@@ -114,12 +114,4 @@ public class Game {
 			}
 		}
 	}
-	
-	public static void main(String[] args) throws IOException {
-		String[] r = readFile("distances.csv");
-		for(int i = 0; i<r.length; i++) {
-			System.out.print(r[i]+" , ");
-		}
-	}
-
 }
