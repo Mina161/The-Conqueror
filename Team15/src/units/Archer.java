@@ -1,5 +1,4 @@
 package units;
-
 import exceptions.FriendlyFireException;
 
 public class Archer extends Unit {
@@ -10,35 +9,41 @@ public class Archer extends Unit {
 	
 	public void attack(Unit target) throws FriendlyFireException{
 		super.attack(target);
-		int targetCount = target.getCurrentSoldierCount();
-		int attackerCount = getCurrentSoldierCount();
 		double factor = 0.0;
-		if(getLevel() == 1) {
-			if(target instanceof Archer) 
-				factor = 0.3;
-			else if (target instanceof Cavalry)
-				factor = 0.1;
-			else if (target instanceof Infantry)
-				factor = 0.2;
-		} else if(getLevel() == 2) {
-			if(target instanceof Archer) 
-				factor = 0.4;
-			else if (target instanceof Cavalry)
-				factor = 0.1;
-			else if (target instanceof Infantry)
-				factor = 0.3;
-		} else {
-			if(target instanceof Archer) 
-				factor = 0.5;
-			else if (target instanceof Cavalry)
-				factor = 0.2;
-			else if (target instanceof Infantry)
-				factor = 0.4;
-		}
-		int reduceBy = (int)(factor*attackerCount);
-		targetCount = (targetCount-reduceBy)<0 ? 0:(targetCount-reduceBy);
-		target.setCurrentSoldierCount(targetCount);
+		if(getLevel() == 1 && target instanceof Archer)
+			factor = 0.3;
+		
+		if(getLevel() == 2 && target instanceof Archer)
+			factor = 0.4;
+		
+		if(getLevel() == 3 && target instanceof Archer)
+			factor = 0.5;
+		
+		if(getLevel() == 1 && target instanceof Cavalry)
+			factor = 0.1;
+		
+		if(getLevel() == 2 && target instanceof Cavalry)
+			factor = 0.1;
+		
+		if(getLevel() == 3 && target instanceof Cavalry)
+			factor = 0.2;
+		
+		if(getLevel() == 1 && target instanceof Infantry)
+			factor = 0.2;
+		
+		if(getLevel() == 2 && target instanceof Infantry)
+			factor = 0.3;
+		
+		if(getLevel() == 3 && target instanceof Infantry)
+			factor = 0.4;
+		
+		if((int) (target.getCurrentSoldierCount()-getCurrentSoldierCount()*factor)>0)
+			target.setCurrentSoldierCount((int) (target.getCurrentSoldierCount()-getCurrentSoldierCount()*factor));
+		else
+			target.setCurrentSoldierCount(0);
+		
 		target.getParentArmy().handleAttackedUnit(target);
 	}
+
 
 }

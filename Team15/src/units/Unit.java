@@ -1,5 +1,6 @@
 package units;
 import exceptions.FriendlyFireException;
+import units.Army;
 
 public abstract class Unit {
 	private int level; //READ ONLY
@@ -10,17 +11,13 @@ public abstract class Unit {
 	private double siegeUpkeep; //READ ONLY
 	private Army parentArmy;
 	
-	public Unit(int level,int maxSoldierCount,double idleUpkeep, double marchingUpkeep,double siegeUpkeep) {
+	public Unit(int level, int maxSoldierCount, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
 		this.level = level;
 		this.maxSoldierCount = maxSoldierCount;
-		currentSoldierCount = maxSoldierCount;
 		this.idleUpkeep = idleUpkeep;
 		this.marchingUpkeep = marchingUpkeep;
 		this.siegeUpkeep = siegeUpkeep;
-	}
-	
-	public void attack(Unit target) throws FriendlyFireException{
-		if(parentArmy.getUnits().contains(target)) throw new FriendlyFireException();
+		currentSoldierCount = maxSoldierCount;
 	}
 	
 	public int getLevel() {
@@ -50,7 +47,8 @@ public abstract class Unit {
 	public double getSiegeUpkeep() {
 		return siegeUpkeep;
 	}
-
+	
+	
 	public Army getParentArmy() {
 		return parentArmy;
 	}
@@ -59,4 +57,7 @@ public abstract class Unit {
 		this.parentArmy = parentArmy;
 	}
 
+	public void attack(Unit target) throws FriendlyFireException{
+		if(parentArmy.equals(target.parentArmy)) throw new FriendlyFireException();
+	}
 }
