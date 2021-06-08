@@ -26,6 +26,7 @@ public class Army {
 		    }
 			  
 	}
+	
 	public void handleAttackedUnit(Unit u) {
 		if (u.getCurrentSoldierCount()==0)
 			units.remove(u);

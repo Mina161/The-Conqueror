@@ -13,8 +13,7 @@ public class Barracks extends MilitaryBuilding {
 	}
 	
 	public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
-		if(isCoolDown()) throw new BuildingInCoolDownException();
-		if(getLevel() == 3) throw new MaxLevelException();
+		super.upgrade();
 		
 		if(getLevel() == 1) {
 			setLevel(2);
@@ -24,6 +23,7 @@ public class Barracks extends MilitaryBuilding {
 			setLevel(3);
 			setRecruitmentCost(600);
 		}
+		
 	}
 	
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException {
@@ -31,7 +31,6 @@ public class Barracks extends MilitaryBuilding {
 		if(getCurrentRecruit() == getMaxRecruit()) throw new MaxRecruitedException();
 		
 		setCurrentRecruit(getCurrentRecruit()+1);
-		setCoolDown(true);
 		
 		if(getLevel()==1) {
 			return new Infantry(1,50,0.5,0.6,0.7);

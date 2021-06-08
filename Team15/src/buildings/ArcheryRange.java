@@ -13,8 +13,7 @@ public class ArcheryRange extends MilitaryBuilding{
 	}
 	
 	public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
-		if(isCoolDown()) throw new BuildingInCoolDownException();
-		if(getLevel() == 3) throw new MaxLevelException();
+		super.upgrade();
 		
 		if(getLevel() == 1) {
 			setLevel(2);
@@ -31,7 +30,6 @@ public class ArcheryRange extends MilitaryBuilding{
 		if(getCurrentRecruit() == getMaxRecruit()) throw new MaxRecruitedException();
 		
 		setCurrentRecruit(getCurrentRecruit()+1);
-		setCoolDown(true);
 		
 		if(getLevel()==1) {
 			return new Archer(1,60,0.4,0.5,0.6);

@@ -10,8 +10,7 @@ public class Market extends EconomicBuilding {
 	}
 	
 	public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
-		if(isCoolDown()) throw new BuildingInCoolDownException();
-		if(getLevel() == 3) throw new MaxLevelException();
+		super.upgrade();
 		
 		if(getLevel() == 1) {
 			setLevel(2);
