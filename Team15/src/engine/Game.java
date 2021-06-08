@@ -218,11 +218,14 @@ public class Game {
 		if(player.getControlledArmies().contains(defender) && player.getControlledArmies().contains(attacker)) throw new FriendlyFireException();
 		
 		for(int attack = 0; ; attack++) {
-			int ra = random(0,attacker.getUnits().size()), rd = random(0,defender.getUnits().size()); // get 2 random units each loop
+			Random rand = new Random();
+			Unit randomAttacker = attacker.getUnits().get(rand.nextInt(attacker.getUnits().size()));
+			Unit randomDefender = defender.getUnits().get(rand.nextInt(defender.getUnits().size())); // get 2 random units each loop
+			
 			if(attack%2 == 0) { //Even and odd to alternate attacker and defender
-				attacker.getUnits().get(ra).attack(defender.getUnits().get(rd));
+				randomAttacker.attack(randomDefender);
 			} else {
-				defender.getUnits().get(rd).attack(attacker.getUnits().get(ra));
+				randomDefender.attack(randomAttacker);
 			}
 			
 			if(attacker.getUnits().size() == 0) {
@@ -239,9 +242,4 @@ public class Game {
 	public boolean isGameOver() {
 		return (player.getControlledCities().containsAll(availableCities)) || (currentTurnCount > maxTurnCount);
 	}
-	
-	public int random(int min, int max) { // method to ease getting random numbers
-		return (int)(Math.random()*(max-min));
-	}
-	
 }
