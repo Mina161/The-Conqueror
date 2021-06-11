@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class BuildingCoolDownException extends BuildingException {
 	public BuildingCoolDownException() {
 		

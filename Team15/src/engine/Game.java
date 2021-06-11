@@ -3,6 +3,7 @@ package engine;
 import java.util.*;
 import buildings.*;
 import exceptions.FriendlyFireException;
+
 import java.io.*;
 import units.*;
 
@@ -19,11 +20,11 @@ public class Game {
 		distances = new ArrayList<Distance>();
 		loadCitiesAndDistances();
 		for(int i = 0; i<availableCities.size(); i++) {
-			City curCity = availableCities.get(i);
-			if(!curCity.getName().equals(playerCity))
-				loadArmy(curCity.getName(),curCity.getName().toLowerCase()+"_army.csv");
+			City currCity = availableCities.get(i);
+			if(!currCity.getName().equals(playerCity))
+				loadArmy(currCity.getName(),currCity.getName().toLowerCase()+"_army.csv");
 			else {
-				player.getControlledCities().add(curCity);
+				player.getControlledCities().add(currCity);
 			}
 		}
 	}
@@ -174,15 +175,17 @@ public class Game {
 					currArmy.setCurrentLocation(currArmy.getTarget());
 					currArmy.setTarget("");
 					currArmy.setCurrentStatus(Status.IDLE);
+					currArmy.setDistancetoTarget(-1);
 				}
 			}
 		}
 		
-		int newFood = (player.getFood()-foodNeeded)<0 ? 0:(int)(player.getFood()-foodNeeded);
+		int enoughToFeed = (int) (player.getFood()-foodNeeded); 
+		int newFood = enoughToFeed < 0 ? 0:enoughToFeed; 
 		player.setFood(newFood);
 		
 		//Loop on Units of each Army when starving
-		if(newFood == 0) {
+		if(newFood == 0 && enoughToFeed != 0) { //If enoughToFeed is exactly 0 then I should be able to feed the entire army without starving 
 			for(int i = 0; i<player.getControlledArmies().size(); i++) {
 				Army currArmy = player.getControlledArmies().get(i);
 				currArmy.getUnits().forEach( (u) -> u.setCurrentSoldierCount( (int) (u.getCurrentSoldierCount()*0.9) ) );
@@ -192,11 +195,15 @@ public class Game {
 		//Loop on all Available Cities to count turns under siege and decrement
 		for(int i = 0; i<availableCities.size(); i++) {
 			City currCity = availableCities.get(i);
-			if(currCity.isUnderSiege()) currCity.setTurnsUnderSiege(currCity.getTurnsUnderSiege()+1);
-			Army currArmy = currCity.getDefendingArmy();
-			currArmy.getUnits().forEach( (u) -> u.setCurrentSoldierCount( (int) (u.getCurrentSoldierCount()*0.9) ) );
+			if(currCity.isUnderSiege() && currCity.getTurnsUnderSiege()<3) {
+				currCity.setTurnsUnderSiege(currCity.getTurnsUnderSiege()+1);
+				Army currArmy = currCity.getDefendingArmy();
+				currArmy.getUnits().forEach( (u) -> u.setCurrentSoldierCount( (int) (u.getCurrentSoldierCount()*0.9) ) );
+				if(currCity.getTurnsUnderSiege()==3) {
+					currCity.setUnderSiege(false);
+				}
+			} 
 		}
-		
 	}
 	
 	public void occupy(Army a,String cityName) {
@@ -207,6 +214,7 @@ public class Game {
 				break;
 			}
 		}
+		if(occupied == null) return;
 		
 		player.getControlledCities().add(occupied);
 		occupied.setDefendingArmy(a);
@@ -242,4 +250,5 @@ public class Game {
 	public boolean isGameOver() {
 		return (player.getControlledCities().containsAll(availableCities)) || (currentTurnCount > maxTurnCount);
 	}
+
 }

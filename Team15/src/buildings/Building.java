@@ -48,6 +48,5 @@ public abstract class Building {
 	public void setCoolDown(boolean coolDown) {
 		this.coolDown = coolDown;
 	}
-	
 }
 

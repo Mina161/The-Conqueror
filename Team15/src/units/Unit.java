@@ -1,6 +1,5 @@
 package units;
 import exceptions.FriendlyFireException;
-import units.Army;
 
 public abstract class Unit {
 	private int level; //READ ONLY

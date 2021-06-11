@@ -135,7 +135,7 @@ public class Player {
 	}
 	
 	public void laySiege(Army army,City city) throws TargetNotReachedException, FriendlyCityException{
-		if(!army.getCurrentLocation().equals(city.getName()) || army.getDistancetoTarget() > 0) throw new TargetNotReachedException();
+		if(!army.getCurrentLocation().equals(city.getName()) || army.getDistancetoTarget() > 0 || army.getCurrentStatus() == Status.MARCHING) throw new TargetNotReachedException();
 		if(controlledCities.contains(city)) throw new FriendlyCityException();
 		
 		army.setCurrentStatus(Status.BESIEGING);
