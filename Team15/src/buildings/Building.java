@@ -1,5 +1,8 @@
 package buildings;
-import exceptions.*;
+
+import exceptions.BuildingInCoolDownException;
+import exceptions.MaxLevelException;
+
 public abstract class Building {
 	
 	private int cost;
@@ -7,28 +10,31 @@ public abstract class Building {
 	private int upgradeCost;
 	private boolean coolDown;
 
-	public Building(int cost, int upgradeCost) {
-		this.cost = cost;
-		this.upgradeCost = upgradeCost;
-		level = 1;
-		coolDown = true;
+	public Building(int cost,int upgradeCost) {
+		this.cost=cost;
+		this.upgradeCost=upgradeCost;
+		this.level=1;
+		coolDown=true;
 	}
 	
-	public void upgrade() throws BuildingInCoolDownException, MaxLevelException{
-		if(isCoolDown()) throw new BuildingInCoolDownException();
-		if(getLevel() == 3) throw new MaxLevelException();
-		setCoolDown(true);
+	public  void upgrade() throws BuildingInCoolDownException, MaxLevelException
+	{
+		if(coolDown)
+			throw new BuildingInCoolDownException("Building is in cool down. Wait for the next turn");
+		if(level==3)
+			throw new MaxLevelException("Maximum level reached!!");
+		coolDown=true;
 	}
 
 	public int getCost() {
 		return cost;
 	}
 
-
 	public int getLevel() {
 		return level;
 	}
 
+	
 	public void setLevel(int level) {
 		this.level = level;
 	}
@@ -45,8 +51,9 @@ public abstract class Building {
 		return coolDown;
 	}
 
-	public void setCoolDown(boolean coolDown) {
-		this.coolDown = coolDown;
+	public void setCoolDown(boolean inCooldown) {
+		this.coolDown = inCooldown;
 	}
-}
+	
 
+}

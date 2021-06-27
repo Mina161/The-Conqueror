@@ -1,48 +1,58 @@
 package units;
+
 import exceptions.FriendlyFireException;
 
-public class Infantry extends Unit{
+public class Infantry extends Unit {
 
-	public Infantry(int level, int maxSoldierCount, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
-		super(level, maxSoldierCount, idleUpkeep, marchingUpkeep, siegeUpkeep);
+	public Infantry(int level, int maxSoldierConunt, double idleUpkeep, double marchingUpkeep, double siegeUpkeep) {
+		super(level, maxSoldierConunt, idleUpkeep, marchingUpkeep, siegeUpkeep);
 	}
-	
-	public void attack(Unit target) throws FriendlyFireException{
+
+	@Override
+	public void attack(Unit target) throws FriendlyFireException {
 		super.attack(target);
-		double factor = 0.0;
-		if(getLevel() == 1 && target instanceof Archer)
-			factor = 0.3;
 		
-		if(getLevel() == 2 && target instanceof Archer)
-			factor = 0.4;
-		
-		if(getLevel() == 3 && target instanceof Archer)
-			factor = 0.5;
-		
-		if(getLevel() == 1 && target instanceof Cavalry)
-			factor = 0.1;
-		
-		if(getLevel() == 2 && target instanceof Cavalry)
-			factor = 0.2;
-		
-		if(getLevel() == 3 && target instanceof Cavalry)
-			factor = 0.25;
-		
-		if(getLevel() == 1 && target instanceof Infantry)
-			factor = 0.1;
-		
-		if(getLevel() == 2 && target instanceof Infantry)
-			factor = 0.2;
-		
-		if(getLevel() == 3 && target instanceof Infantry)
-			factor = 0.3;
-		
-		if((int) (target.getCurrentSoldierCount()-getCurrentSoldierCount()*factor)>0)
-			target.setCurrentSoldierCount((int) (target.getCurrentSoldierCount()-getCurrentSoldierCount()*factor));
-		else
-			target.setCurrentSoldierCount(0);
+		int damage = getDamage(target);
+		target.setCurrentSoldierCount(target.getCurrentSoldierCount()-damage);
 		
 		target.getParentArmy().handleAttackedUnit(target);
+	}
+	
+	public int getDamage(Unit target) {
+		double factor=0;
+		if(target instanceof Archer)
+		{
+			if(getLevel()==1)
+				factor=0.3;
+			else if(getLevel()==2)
+				factor=0.4;
+			else 
+				factor=0.5;
+		}
+		else if(target instanceof Infantry)
+		{
+			if(getLevel()==1)
+				factor=0.1;
+			else if(getLevel()==2)
+				factor=0.2;
+			else
+				factor=0.3;
+		}
+		else if(target instanceof Cavalry)
+		{
+			if(getLevel()==1 )
+				factor=0.1;
+			else if(getLevel()==2)
+				factor=0.2;
+			else
+				factor=0.25;
+		}
+		
+		return (int)(factor*getCurrentSoldierCount());
+	}
+	
+	public String toString() {
+		return "Infantry Level "+getLevel();
 	}
 
 }
