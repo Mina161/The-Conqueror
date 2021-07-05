@@ -17,9 +17,9 @@ public class Barracks extends MilitaryBuilding {
 	@Override
 	public Unit recruit() throws BuildingInCoolDownException, MaxRecruitedException {
 		if(isCoolDown())
-			throw new BuildingInCoolDownException("Building is in cool down. Wait for the next turn");
+			throw new BuildingInCoolDownException("Building is in cool down,Wait for the next turn");
 		if(getCurrentRecruit()==getMaxRecruit())
-			throw new MaxRecruitedException("Cannot Recruit more than 3 units per turn");
+			throw new MaxRecruitedException("Cannot Recruit more than,3 units per turn");
 		setCurrentRecruit(getCurrentRecruit()+1);
 		if(getLevel()==1)
 			return new Infantry(1, 50, 0.5, 0.6, 0.7);

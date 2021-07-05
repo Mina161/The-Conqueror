@@ -185,6 +185,12 @@ public class Game {
 					u.setCurrentSoldierCount(u.getCurrentSoldierCount() - (int) (u.getCurrentSoldierCount() * 0.1));
 				}
 			}
+			for (City c : player.getControlledCities()) {
+				Army a = c.getDefendingArmy();
+				for (Unit u : a.getUnits()) {
+					u.setCurrentSoldierCount(u.getCurrentSoldierCount() - (int) (u.getCurrentSoldierCount() * 0.1));
+				}
+			}
 		}
 
 		for (City c : availableCities) {

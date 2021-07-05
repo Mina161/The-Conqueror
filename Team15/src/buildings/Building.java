@@ -20,7 +20,7 @@ public abstract class Building {
 	public  void upgrade() throws BuildingInCoolDownException, MaxLevelException
 	{
 		if(coolDown)
-			throw new BuildingInCoolDownException("Building is in cool down. Wait for the next turn");
+			throw new BuildingInCoolDownException("Building is in cool down,Wait for the next turn");
 		if(level==3)
 			throw new MaxLevelException("Maximum level reached!!");
 		coolDown=true;

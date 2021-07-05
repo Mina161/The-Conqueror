@@ -1,0 +1,31 @@
+Welcome to Empire Building Game
+"Target:",
+"The game's target is to conquer the world",
+"World Map:",
+"A the top you can see all the game's information (turns, gold and food)",
+"On the left you can see all the armies you control",
+"On the map itself, can see the 3 cities: Cairo, Rome and Sparta",
+"To enter a city you control, simply click on it",
+"Cities:",
+"Each city has 5 empty land plots to build on",
+"Farm: Generates food for your armies",
+"Market: Generates money for you to spend",
+"Archery Range: To recruit Archers",
+"Barracks: To recruit Infantry",
+"Stable: To recruit Cavalry",
+"Creating armies:",
+"Once you recruit some units, visit your fortress and initiate an army using a unit of your choice",
+"You can also relocate already recruited units to your initiated army by clicking \"Relocate units\"",
+"Attacking:",
+"Once you reach a city you've targeted you will have 3 options",
+"Besiege: Lay siege on the city to starve them for 3 turns",
+"Attack: Lead your army in battle against the enemy defending army. Simply drag your attacker and drop on the enemy to attack",
+"Auto-resolve: Battle will be randomly resolved until one army loses",
+"Winning:",
+"You win when you conquer the 3 cities in under 50 turns",
+"Tips:",
+"Build markets early on to avoid bankruptcy",
+"When you have more armies than you can feed, they will lose health"
+
+
+
